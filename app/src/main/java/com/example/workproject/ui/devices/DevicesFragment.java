@@ -1,7 +1,6 @@
 package com.example.workproject.ui.devices;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.telephony.SmsManager;
@@ -14,33 +13,23 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
-import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModel;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.workproject.Device;
 import com.example.workproject.Devicedata;
 import com.example.workproject.IconColors;
 import com.example.workproject.Items;
-import com.example.workproject.MainActivity2;
-import com.example.workproject.NavigationDrawer;
 import com.example.workproject.R;
 import com.example.workproject.SimpleApi;
 import com.example.workproject.databinding.FragmentDevicesBinding;
-import com.example.workproject.databinding.FragmentGalleryBinding;
-import com.example.workproject.ui.devices.DevicesViewModel;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -65,7 +54,9 @@ public class DevicesFragment extends Fragment {
     Button immobilizebtn;
     FrameLayout howdy;
     ArrayList<Integer> number = new ArrayList<>();
-    ArrayList<String> gyaisaa = new ArrayList<>();
+    ArrayList<String> checkboxstring = new ArrayList<>();
+    ArrayList<Integer> cbselecteddevices = new ArrayList<>();
+    Boolean succeeded;
 
     private FragmentDevicesBinding binding;
 
@@ -73,16 +64,12 @@ public class DevicesFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         devicesViewModel = new ViewModelProvider(this).get(DevicesViewModel.class);
 
+        ActivityCompat.requestPermissions(getActivity(),new String[]{Manifest.permission.SEND_SMS, Manifest.permission.READ_SMS}, PackageManager.PERMISSION_GRANTED);
         //Fragment View Declaration
         binding = FragmentDevicesBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-        //viewmodel = new ViewModelProvider(this).get(DevicesViewModel.class);
-       // devicesViewModel.getText().observe(getViewLifecycleOwner(), FragmentText::setText );
-      //  devicesViewModel.getText().observe(getViewLifecycleOwner(), FragmentText::setText);
-      //  igotit = binding.fragmentTextview;
-    //    newuah = igotit.getText().toString();
+
         immobilizebtn = root.findViewById(R.id.immobilizebtn);
-        //Log.d("hopefully",newuah);
         //Access to Atrams API
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://vmtrack.atrams.co/")
@@ -167,20 +154,20 @@ public class DevicesFragment extends Fragment {
                         public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                             if (checkBox.isChecked()) {
                                 number.add(compoundButton.getLayout().hashCode());
-                                gyaisaa.add(compoundButton.getLayout().getText().toString());
+                                checkboxstring.add(compoundButton.getLayout().getText().toString());
                             }
                             else {
                                 for(int j=0;j<number.size();j++){
                                     if(compoundButton.getLayout().hashCode() == number.get(j)){
                                         number.remove(j);
                                     }
-                                    if(compoundButton.getLayout().getText().toString() == gyaisaa.get(j)){
-                                        gyaisaa.remove(j);
+                                    if(compoundButton.getLayout().getText().toString() == checkboxstring.get(j)){
+                                        checkboxstring.remove(j);
                                     }
                                 }
                             }
                             System.out.println(number);
-                            System.out.println(gyaisaa);
+                            System.out.println(checkboxstring);
                         }
                     });
 
@@ -192,15 +179,34 @@ public class DevicesFragment extends Fragment {
                     @Override
                     public void onClick(View view) {
 
+                             for (int i=0;i<checkboxstring.size();i++){
+                                 for(int j=0; j<items.length; j++){
+                                  if(checkboxstring.get(i) == items[j].getName().toString()){
+                                  System.out.println("found the number at " + j);
+                                  cbselecteddevices.add(j);
+                                        succeeded = true;
+                                      }
+                                      else {
+                                          succeeded = false;
+                                      }
+                                  }
+                              }
 
+                        int running=0;
+                        //onClick Area
+                        for (int i=0;i<cbselecteddevices.size(); i++){
+                            String devicedaabi = items[cbselecteddevices.get(i)].getDevice_data().getsim_number();
+                            System.out.println(devicedaabi.replaceAll("\\s",""));
+                            sendSms(devicedaabi.trim(),"smart 24KN1 setparam");
+                      //
+                        }
+                        //onClick Area
                     }
                 });
 
                 int viewcount = layout.getChildCount();
                 Log.d("Number of views", String.valueOf(viewcount));
-                //  Log.d("checking", mandem );
-
-
+                Log.d("Number of items", String.valueOf(items.length));
 
             }
 
@@ -222,3 +228,9 @@ public class DevicesFragment extends Fragment {
 }
 //   LayoutInflater inflater2 =  (LayoutInflater)getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 //private TextView igotit;
+/*       //viewmodel = new ViewModelProvider(this).get(DevicesViewModel.class);
+       // devicesViewModel.getText().observe(getViewLifecycleOwner(), FragmentText::setText );
+      //  devicesViewModel.getText().observe(getViewLifecycleOwner(), FragmentText::setText);
+      //  igotit = binding.fragmentTextview;
+        newuah = igotit.getText().toString();
+   */
