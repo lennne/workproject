@@ -8,7 +8,9 @@
         <item
             android:id="@+id/nav_devices"
             android:icon="@drawable/ic_outline_directions_car_24"
-            android:title="@string/menu_devices" />
+            android:title="@string/menu_devices"
+
+            />
 
     </group>
 </menu>

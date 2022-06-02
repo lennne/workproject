@@ -5,59 +5,67 @@
     android:orientation="horizontal"
     android:id="@+id/layout_device_table">
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="44dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="37dp"
+            android:layout_marginLeft="1dp"
+            android:background="@drawable/round_view"
+            >
+
+            <CheckBox
+                android:id="@+id/checkbox1"
+                android:background="@drawable/round_checkbox"
+                android:layout_width="115dp"
+                android:layout_height="30dp"
+                android:textColor="@color/white"
+                android:layout_marginLeft="3dp"
+                android:layout_gravity="center_vertical"
+                android:text="Hello"
+                android:layout_marginRight="10dp"
+                android:textSize="10dp" />
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center_vertical"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:layout_marginRight="10dp"
+                android:paddingLeft="5dp"
+                android:text="TextView"
+                android:textSize="10dp" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="100dp"
+                android:layout_marginRight="10dp"
+                android:layout_height="30dp"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:layout_gravity="center_vertical"
+                android:text="TextView"
+                android:textSize="10dp"
+
+                />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="80dp"
+                android:layout_height="30dp"
+                android:textColor="@color/white"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                android:text="TextView"
+                android:textSize="10dp" />
 
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="47dp"
-                    >
+        </LinearLayout>
 
-                        <CheckBox
-                            android:id="@+id/checkbox1"
-                            android:background="#00afff"
-                            android:layout_width="115dp"
-
-                            android:layout_height="30dp"
-                            android:layout_marginLeft="10dp"
-                            android:layout_gravity="center_vertical"
-                            android:text="Hello"
-                            android:layout_marginRight="10dp"
-                            android:textSize="10dp" />
-
-                        <TextView
-                            android:id="@+id/textView1"
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:layout_gravity="center_vertical"
-                            android:gravity="center"
-                            android:layout_marginRight="10dp"
-                            android:paddingLeft="5dp"
-                            android:text="TextView"
-                            android:textSize="10dp" />
-
-                        <TextView
-                            android:id="@+id/textView2"
-                            android:layout_width="80dp"
-                            android:layout_marginRight="10dp"
-                            android:layout_height="30dp"
-                            android:gravity="center"
-                            android:layout_gravity="center_vertical"
-                            android:text="TextView"
-                            android:textSize="10dp"
-
-                            />
-
-                    <TextView
-                        android:id="@+id/textView3"
-                        android:layout_width="80dp"
-                        android:layout_height="30dp"
-                        android:layout_gravity="center_vertical"
-                        android:gravity="center"
-                        android:text="TextView"
-                        android:textSize="10dp" />
-
-
-                </LinearLayout>
+    </LinearLayout>
 
 
 
