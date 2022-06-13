@@ -27,14 +27,21 @@ import com.example.workproject.Device;
 import com.example.workproject.Devicedata;
 import com.example.workproject.IconColors;
 import com.example.workproject.Items;
+import com.example.workproject.LoginActivity;
 import com.example.workproject.R;
 import com.example.workproject.SimpleApi;
 import com.example.workproject.databinding.FragmentDevicesBinding;
 
+import java.io.IOException;
+import java.net.HttpURLConnection;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import okhttp3.HttpUrl;
+import okhttp3.Interceptor;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -71,8 +78,25 @@ public class DevicesFragment extends Fragment {
 
         immobilizebtn = root.findViewById(R.id.immobilizebtn);
         //Access to Atrams API
+
+/*
+        Interceptor myinterceptor = new Interceptor() {
+            @Override
+            public okhttp3.Response intercept(Chain chain) throws IOException {
+                Request request = chain.request();
+                String url = request.url().toString();
+                Log.d("TAG", url);
+
+             return null;
+            }
+        };
+
+        OkHttpClient.Builder okhttpBuilder = new OkHttpClient.Builder();
+        okhttpBuilder.interceptors().add(myinterceptor);
+*/
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://vmtrack.atrams.co/")
+  //            .client(okhttpBuilder.build())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -88,8 +112,8 @@ public class DevicesFragment extends Fragment {
         Bundle data = getArguments();
         if( data != null ){
             newuah = getArguments().getString("transfer");
-            Log.d("worked",newuah);
         }
+        System.out.println(newuah);
         createDevices(newuah);
 
         //   final TextView textView = binding.textDevices;
@@ -123,10 +147,13 @@ public class DevicesFragment extends Fragment {
             public void onResponse(Call<Device[]> hello, Response<Device[]> response) {
                 if (!response.isSuccessful()){
                     //  viewResults.setText("Code: " + response.code());
+                    System.out.println(response.raw().request().url());
                     Toast.makeText(DevicesFragment.this.getContext(),"Code:::::: "+ response.code(),Toast.LENGTH_SHORT).show();
                     return;
                 }
+                System.out.println(response.raw().request().url());
                 device = response.body();
+                System.out.println(device.length);
                 Items[] items = device[0].getItems();
                 Devicedata devicedata = items[0].getDevice_data();
                 IconColors iconColors = items[0].getIcon_colors();
@@ -139,7 +166,6 @@ public class DevicesFragment extends Fragment {
                     checkBox.setText(items[i].getName());
                     viewDevices1 = layout.getChildAt(i).findViewById(R.id.textView1);
                     String speed = items[i].getSpeed().toString();
-                    System.out.println("THe speed is " + speed);
                     viewDevices2 = layout.getChildAt(i).findViewById(R.id.textView2);
                     if(speed.equals("0")){
                         viewDevices2.setText("No");
@@ -172,6 +198,7 @@ public class DevicesFragment extends Fragment {
                     });
 
                     viewDevices3 = layout.getChildAt(i).findViewById(R.id.textView3);
+                    viewDevices3.setText("Not Immobilized");
 
                 }
 
@@ -197,7 +224,10 @@ public class DevicesFragment extends Fragment {
                         for (int i=0;i<cbselecteddevices.size(); i++){
                             String devicedaabi = items[cbselecteddevices.get(i)].getDevice_data().getsim_number();
                             System.out.println(devicedaabi.replaceAll("\\s",""));
-                            sendSms(devicedaabi.trim(),"smart 24KN1 setparam");
+                            sendSms(devicedaabi.trim(),"stop112112");
+                            viewDevices3 = layout.getChildAt(cbselecteddevices.get(i)).findViewById(R.id.textView3);
+                            viewDevices3.setText("Immobilized");
+
                       //
                         }
                         //onClick Area
@@ -205,14 +235,12 @@ public class DevicesFragment extends Fragment {
                 });
 
                 int viewcount = layout.getChildCount();
-                Log.d("Number of views", String.valueOf(viewcount));
-                Log.d("Number of items", String.valueOf(items.length));
-
-            }
+                  }
 
             @Override
             public void onFailure(Call<Device[]> hello, Throwable t) {
-
+                Toast.makeText(DevicesFragment.this.getContext(),"Code::: " + t.getMessage(),Toast.LENGTH_SHORT).show();
+                System.out.println(t.getMessage().toString());
             }
         });
 
@@ -220,7 +248,10 @@ public class DevicesFragment extends Fragment {
 
     public void sendSms(String passphone ,String passmessage){
         SmsManager mySmsManager = SmsManager.getDefault();
-        mySmsManager.sendTextMessage(passphone,null,passmessage,null,null);
+        if(!passphone.equals(" ")){
+            mySmsManager.sendTextMessage(passphone,null,passmessage,null,null);
+        }
+
     }
 
 

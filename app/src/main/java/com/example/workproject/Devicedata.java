@@ -6,8 +6,9 @@ public class Devicedata {
 
     @SerializedName("pivot")
     private Pivot pivot;
-    @SerializedName("users")
+
     private Users users;
+    private Users[] users1;
 
 
 
@@ -43,6 +44,7 @@ public class Devicedata {
     public Devicedata() {
         this.pivot = pivot;
         this.users = users;
+        this.users1 = users1;
         this.id = id;
         this.user_id = user_id;
         this.traccar_device_id = traccar_device_id;
@@ -73,12 +75,15 @@ public class Devicedata {
         this.updated_at = updated_at;
     }
 
-    public Devicedata(Pivot pivot, Users users, String id, String user_id, String traccar_device_id, String icon_id, String active, String deleted, String name, String imei,
+
+
+    public Devicedata(Pivot pivot, Users users, Users[] users1, String id, String user_id, String traccar_device_id, String icon_id, String active, String deleted, String name, String imei,
                       String fuel_measurement_id, String fuel_quantity, String fuel_price, String fuel_per_km, String sim_number, String device_model, String plate_number,
                       String vin, String registration_number, String object_owner, String expiration_date, String tail_color, String tail_length,
                       String engine_hours, String detect_engine, String min_moving_speed, String min_fuel_fillings, String snap_to_road, String created_at, String updated_at) {
         this.pivot = pivot;
         this.users = users;
+        this.users1 = users1;
         this.id = id;
         this.user_id = user_id;
         this.traccar_device_id = traccar_device_id;
@@ -108,6 +113,7 @@ public class Devicedata {
         this.created_at = created_at;
         this.updated_at = updated_at;
     }
+
 
     public Pivot getPivot() {
         return pivot;
@@ -120,6 +126,10 @@ public class Devicedata {
     public Users getUsers() {
         return users;
     }
+
+    public Users[] getUsers1(){return users1; }
+
+    public void setUsers1(Users[] users1){ this.users1 = users1;}
 
     public void setUsers(Users users) {
         this.users = users;

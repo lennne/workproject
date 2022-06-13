@@ -20,7 +20,6 @@ public class Device implements Serializable {
     public Device(String title, Items[] items) {
         this.title = title;
         this.items = items;
-
     }
 
     public String getTitle() {
