@@ -23,4 +23,9 @@ public interface SimpleApi {
     Call<Device[]> createDevices(
             @QueryMap Map<String, String> firstTry
             );
+
+    @GET("/api/get_devices")
+    Call<DeviceTwo[]> createDevicesTwo(
+            @QueryMap Map<String, String> firstTry
+    );
 }

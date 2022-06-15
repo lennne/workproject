@@ -2,14 +2,12 @@ package com.example.workproject;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Devicedata {
-
+public class DeviceDataTwo {
     @SerializedName("pivot")
     private Pivot pivot;
 
     @SerializedName("users")
-    private Users users;
-
+    private Users[] users;
 
 
 
@@ -42,7 +40,7 @@ public class Devicedata {
     private String created_at;
     private String updated_at;
 
-    public Devicedata() {
+    public DeviceDataTwo() {
         this.pivot = pivot;
         this.users = users;
         this.id = id;
@@ -77,7 +75,7 @@ public class Devicedata {
 
 
 
-    public Devicedata(Pivot pivot, Users users, String id, String user_id, String traccar_device_id, String icon_id, String active, String deleted, String name, String imei,
+    public DeviceDataTwo(Pivot pivot, Users[] users, String id, String user_id, String traccar_device_id, String icon_id, String active, String deleted, String name, String imei,
                       String fuel_measurement_id, String fuel_quantity, String fuel_price, String fuel_per_km, String sim_number, String device_model, String plate_number,
                       String vin, String registration_number, String object_owner, String expiration_date, String tail_color, String tail_length,
                       String engine_hours, String detect_engine, String min_moving_speed, String min_fuel_fillings, String snap_to_road, String created_at, String updated_at) {
@@ -122,13 +120,9 @@ public class Devicedata {
         this.pivot = pivot;
     }
 
-    public Users getUsers() {
-        return users;
-    }
+    public Users[] getUsers(){return users; }
 
-    public void setUsers(Users users) {
-        this.users = users;
-    }
+    public void setUsers1(Users[] users){ this.users = users;}
 
     public String getuser_id() {
         return user_id;
@@ -240,7 +234,4 @@ public class Devicedata {
     public String getid() {
         return id;
     }
-
-
-
 }
