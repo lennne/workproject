@@ -17,6 +17,7 @@
 
             <CheckBox
                 android:id="@+id/checkbox1"
+                android:buttonTint="#2858ad"
                 android:background="@drawable/round_checkbox"
                 android:layout_width="115dp"
                 android:layout_height="30dp"
