@@ -95,6 +95,8 @@ public class LoginActivity extends AppCompatActivity{
         private void openActivity(){
             Intent intent = new Intent(LoginActivity.this, NavigationDrawer.class);
             intent.putExtra("sendDevice",uah);
+            intent.putExtra("sendEmail", username.getText().toString());
+            System.out.println(username.getText().toString());
             startActivity(intent);
             finish();
 

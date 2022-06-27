@@ -5,20 +5,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".NavigationDrawer">
+    tools:context=".NavigationDrawer"
+    >
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/Theme.Workproject.AppBarOverlay">
+        android:theme="@style/Theme.Workproject.AppBarOverlay"
+        >
 
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/Theme.Workproject.PopupOverlay" />
+            android:background="#00afff"
+            app:popupTheme="@style/Theme.Workproject.PopupOverlay"
+            />
 
     </com.google.android.material.appbar.AppBarLayout>
 

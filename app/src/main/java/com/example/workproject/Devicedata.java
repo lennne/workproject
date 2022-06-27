@@ -10,9 +10,6 @@ public class Devicedata {
     @SerializedName("users")
     private Users users;
 
-
-
-
     private String id;
     private String user_id;
     private String traccar_device_id;

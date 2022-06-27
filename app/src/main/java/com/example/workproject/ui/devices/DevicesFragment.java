@@ -106,8 +106,6 @@ public class DevicesFragment extends Fragment {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        sike = root.findViewById(R.id.nav_header_text);
-
         simpleApi = retrofit.create(SimpleApi.class);
         devicesViewModel = new ViewModelProvider(this).get(DevicesViewModel.class);
         devicesViewModel.getText().observe(getViewLifecycleOwner(), mText -> {
@@ -222,7 +220,6 @@ public class DevicesFragment extends Fragment {
                 immobilizebtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-
                              for (int i=0;i<checkboxstring.size();i++){
                                  for(int j=0; j<items.length; j++){
                                   if(checkboxstring.get(i) == items[j].getName().toString()){
@@ -244,7 +241,6 @@ public class DevicesFragment extends Fragment {
                             sendSms(devicedaabi.trim(),"stop112112");
                             viewDevices3 = layout.getChildAt(cbselecteddevices.get(i)).findViewById(R.id.textView3);
                             viewDevices3.setText("Immobilized");
-
                       //
                         }
                         //onClick Area
@@ -256,7 +252,7 @@ public class DevicesFragment extends Fragment {
 
             @Override
             public void onFailure(Call<Device[]> hello, Throwable t) {
-                Toast.makeText(DevicesFragment.this.getContext(),"Code::: " + t.getMessage(),Toast.LENGTH_SHORT).show();
+          //      Toast.makeText(DevicesFragment.this.getContext(),"Code::: " + t.getMessage(),Toast.LENGTH_SHORT).show();
                 System.out.println(t.getMessage().toString());
                 createDevicesTwo(newuah);
             }
@@ -363,7 +359,7 @@ public class DevicesFragment extends Fragment {
                         for (int i=0;i<cbselecteddevices.size(); i++){
                             String devicedaabi = items[cbselecteddevices.get(i)].getDevice_data().getsim_number();
                             System.out.println(devicedaabi.replaceAll("\\s",""));
-                            sendSms(devicedaabi.trim(),"stop112112");
+                            sendSms(devicedaabi.trim(),"smart 24KN1 setparam 11700:2");
                             viewDevices3 = layout.getChildAt(cbselecteddevices.get(i)).findViewById(R.id.textView3);
                             viewDevices3.setText("Immobilized");
 
@@ -378,7 +374,7 @@ public class DevicesFragment extends Fragment {
 
             @Override
             public void onFailure(Call<DeviceTwo[]> hello, Throwable t) {
-                Toast.makeText(DevicesFragment.this.getContext(),"Code::: " + t.getMessage(),Toast.LENGTH_SHORT).show();
+      //        Toast.makeText(DevicesFragment.this.getContext(),"Code::: " + t.getMessage(),Toast.LENGTH_SHORT).show();
                 System.out.println(t.getMessage().toString());
             }
         });

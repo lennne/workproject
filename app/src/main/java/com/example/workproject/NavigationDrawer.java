@@ -41,7 +41,7 @@ public class NavigationDrawer extends AppCompatActivity {
     String sendtoken = "True";
     String tokenreceived = "False";
     private TextView FragmentText;
-    String uah;
+    String uah,email;
     Handler handler;
     public DevicesViewModel viewmodel;
     NavController navController;
@@ -57,7 +57,9 @@ public class NavigationDrawer extends AppCompatActivity {
         setContentView(binding.getRoot());
         viewmodel = new ViewModelProvider(this).get(DevicesViewModel.class);
 
+
         uah = getIntent().getStringExtra("sendDevice");
+        email = getIntent().getStringExtra("sendEmail");
 
         setSupportActionBar(binding.appBarNavigationDrawer.toolbar);
         binding.appBarNavigationDrawer.fab.setOnClickListener(new View.OnClickListener() {
@@ -79,13 +81,11 @@ public class NavigationDrawer extends AppCompatActivity {
 
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
-
-
-
+        View headerview = navigationView.getHeaderView(0);
+        FragmentText = headerview.findViewById(R.id.textView);
+        FragmentText.setText(email);
         openFragment();
         Log.d("this is navigation", uah);
-
-
     }
 
     private void openFragment(){
