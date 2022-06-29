@@ -39,6 +39,7 @@ import com.example.workproject.databinding.FragmentDevicesBinding;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -164,12 +165,44 @@ public class DevicesFragment extends Fragment {
                 }
                 System.out.println(response.raw().request().url());
                 device = response.body();
-                System.out.println(device.length);
-                Items[] items = device[0].getItems();
+                int sumlength = 0;
+                int itemslength = 0;
+                Items[] items;
+
+                for (int j=0; j<device.length; j++){
+                    sumlength = sumlength + device[j].getItems().length;
+                    System.out.println("total length of groups" + sumlength);
+
+                }
+                items = new Items[sumlength];
+                int count = 0;
+                for (int j=0; j<device.length; j++){
+
+                    itemslength = itemslength + device[j].getItems().length;
+                    System.out.println("total length of groups" + itemslength);
+
+                    for(int i=0; i<device[j].getItems().length;i++){
+                        items[count] = device[j].getItems()[i];
+                        count++;
+                    }
+
+                }
+
+                System.out.println("This is after the loop" + items.length);
+
+
+                System.out.println("Device length" + device.length);
+
+                System.out.println("in items " + items.length);
+
+               /*
+                items[0] = device[0].getItems()[0];
+                System.out.println(items[0].getName());
+
+                */
+
 
                 Devicedata devicedata = items[0].getDevice_data();
-                IconColors iconColors = items[0].getIcon_colors();
-                String devicesContent = "";
                 Log.d("this:::::::::::::::::",device[0].getTitle());
                 Users users = devicedata.getUsers();
                 System.out.println("hello" + users.getemail());
@@ -235,6 +268,7 @@ public class DevicesFragment extends Fragment {
 
                         int running=0;
                         //onClick Area
+
                         for (int i=0;i<cbselecteddevices.size(); i++){
                             String devicedaabi = items[cbselecteddevices.get(i)].getDevice_data().getsim_number();
                             System.out.println(devicedaabi.replaceAll("\\s",""));
@@ -286,7 +320,9 @@ public class DevicesFragment extends Fragment {
                 }
                 System.out.println(response.raw().request().url());
                 deviceTwo = response.body();
-                System.out.println(deviceTwo.length);
+                System.out.println("Device length" + deviceTwo.length);
+
+
                 ItemsTwo[] items = deviceTwo[0].getItems();
                 DeviceDataTwo devicedata = items[0].getDevice_data();
                 IconColors iconColors = items[0].getIcon_colors();
@@ -359,7 +395,7 @@ public class DevicesFragment extends Fragment {
                         for (int i=0;i<cbselecteddevices.size(); i++){
                             String devicedaabi = items[cbselecteddevices.get(i)].getDevice_data().getsim_number();
                             System.out.println(devicedaabi.replaceAll("\\s",""));
-                            sendSms(devicedaabi.trim(),"smart 24KN1 setparam 11700:2");
+                            sendSms(devicedaabi.trim(),"stop112112");
                             viewDevices3 = layout.getChildAt(cbselecteddevices.get(i)).findViewById(R.id.textView3);
                             viewDevices3.setText("Immobilized");
 
