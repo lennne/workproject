@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.workproject">
+    package="com.example.workproject2">
     <uses-permission android:name="android.permission.SEND_SMS"/>
     <uses-permission android:name="android.permission.READ_SMS"/>
     <uses-permission android:name="android.permission.RECEIVE_SMS"/>
@@ -14,20 +14,20 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Workproject">
         <activity
-            android:name=".ui.devicescustom.Devicescustom"
+            android:name="com.example.workproject2.ui.devicescustom.Devicescustom"
             android:exported="false"
             android:label="@string/title_activity_devicescustom"
             android:theme="@style/Theme.Workproject.NoActionBar" />
         <activity
-            android:name=".NavigationDrawer"
+            android:name="com.example.workproject2.NavigationDrawer"
             android:exported="false"
             android:label="@string/title_activity_navigation_drawer"
             android:theme="@style/Theme.Workproject.NoActionBar" />
         <activity
-            android:name=".MainActivity2"
+            android:name="com.example.workproject2.MainActivity2"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
+            android:name="com.example.workproject2.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

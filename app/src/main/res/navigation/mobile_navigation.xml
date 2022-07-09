@@ -8,26 +8,26 @@
 
     <activity
         android:id="@+id/nav_devicescustom"
-        android:name="com.example.workproject.ui.devicescustom.Devicescustom"
+        android:name="com.example.workproject2.ui.devicescustom.Devicescustom"
         android:label="@string/menu_devicescustom"
         tools:layout="@layout/activity_devicescustom" />
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.example.workproject.ui.home.HomeFragment"
+        android:name="com.example.workproject2.ui.home.HomeFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/nav_gallery"
-        android:name="com.example.workproject.ui.gallery.GalleryFragment"
+        android:name="com.example.workproject2.ui.gallery.GalleryFragment"
         android:label="@string/menu_gallery"
         tools:layout="@layout/fragment_gallery" />
 
 
     <fragment
         android:id="@+id/nav_devices"
-        android:name="com.example.workproject.ui.devices.DevicesFragment"
+        android:name="com.example.workproject2.ui.devices.DevicesFragment"
         android:label="@string/menu_devices"
         tools:layout="@layout/fragment_devices" />
 
